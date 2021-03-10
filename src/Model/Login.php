@@ -4,10 +4,12 @@ namespace Model;
 
 use Exception;
 use Helpers\ConnectionTrait;
+use Helpers\HasMensageTrait;
 
 abstract class Login
 {
     use ConnectionTrait;
+    use HasMensageTrait;
 
     private int $id;
     private string $email;
@@ -53,12 +55,12 @@ abstract class Login
             $stmt->bindValue(':email', $this->getEmail());
 
             if ($stmt->execute() !== true)
-                throw new Exception('Erro na conexão com a base de dados');
+                $this->hasMensage('Erro na conexão com a base de dados', '/login');
 
             $userData = $stmt->fetch();
 
             if (!is_array($userData))
-                throw new Exception('Usuario não encontrado');
+                $this->hasMensage('Usuario não encontrado', '/login');
            
             $this->id             = $this->postValidate($userData['id']);
             $this->name           = $this->postValidate($userData['name']);
@@ -68,7 +70,6 @@ abstract class Login
             return true;
 
         } catch (Exception $except) {
-            echo 'Error: ' . $except->getMessage();
             return false;
         }
     }

@@ -31,7 +31,7 @@ class ControllerLogin extends Login
         $pass  = $this->passVerify($_POST['pass']);
 
         if ($login !== true || $pass !== true) {
-            $_SESSION['error'] = 'Login ou senha incorretos';
+            $_SESSION['msg'] = 'Login ou senha incorretos';
             header('Location: /login');
             exit;
         }

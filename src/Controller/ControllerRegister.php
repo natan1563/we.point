@@ -4,13 +4,15 @@ namespace Controller;
 
 use Exception;
 use Helpers\ConnectionTrait;
+use Helpers\HasMensageTrait;
 use Model\Register;
 use PDOException;
 
 class ControllerRegister extends Register
 {
     use ConnectionTrait;
-  
+    use HasMensageTrait;
+
     private function emailVerified() { 
 
       try {
@@ -43,9 +45,9 @@ class ControllerRegister extends Register
       return date('Y-m-d', strtotime($this->getBirthDate()));
     }
 
-    private function saveProfilePicture() {
+    protected function saveProfilePicture() {
 
-      if (empty($this->getProfilePicture()))
+      if (is_null($this->getProfilePicture()))
         return;
 
       try {
@@ -119,12 +121,6 @@ class ControllerRegister extends Register
           $this->hasMensage($except->getMessage(), '/register');
        }
   
-      }
-
-      private function hasMensage(string $mensage, string $redirect): void {
-        $_SESSION['msg'] = $mensage;
-        header('Location: ' . $redirect);
-        exit;
       }
 
       public function __destruct()

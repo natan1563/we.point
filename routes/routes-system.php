@@ -19,4 +19,16 @@ $system->htmlRender(
     )
 );
 
+$system->htmlRender(
+    Routes::get(
+        '/change-profile',
+        'system/form-change-profile.php',
+        '/template/header-template.php',
+        'template/toSystem/profile/footer-profile.php',
+        [
+            'title' => 'Alterar Foto de perfil'
+        ]
+    )
+);
+
 

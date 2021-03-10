@@ -30,8 +30,8 @@ abstract class Register
         return $this->postValidate(filter_input(INPUT_POST, 'birthDate', FILTER_SANITIZE_STRING));
     }
 
-    protected function getProfilePicture(): string {
-        return (isset($_FILES['photo'])) ? $_FILES['photo'] : '';
+    protected function getProfilePicture(): ?array {
+        return (isset($_FILES['photo'])) ? $_FILES['photo'] : null;
     }
     
     protected function postValidate($param): string {
