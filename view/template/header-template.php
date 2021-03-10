@@ -12,12 +12,12 @@
 
 <body>
     
-    <?php if (isset($_SESSION['login']) and $_SESSION['login'] = true)  require_once('toSystem/navbar-template.php'); ?>
+    <?php if (isset($_SESSION['login']) and $_SESSION['login'] = true)  require_once('toSystem/navbar-template.php');  ?>
 
     <div class="container">
         <header>
-            <div class="row d-flex mt-5 w-50">
-                <h2><?= $title ?></h2>
+            <div class="row d-flex mt-5 w-50 <?= (!isset($_SESSION['login'])) ? 'mx-auto border-bottom border-dark' : ''?>">
+                <i class="h2 text-dark"><?= $title ?></i>
             </div>
         </header>
 

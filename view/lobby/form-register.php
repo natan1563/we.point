@@ -1,7 +1,7 @@
 
   <!-- Ini-Form-Register -->
 
-  <div class="w-50">
+  <div class="mx-auto w-50 mt-5">
       <form action="/register" method="post" enctype="multipart/form-data">
 
           <div class="form-group mt-3">
