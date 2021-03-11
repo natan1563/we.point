@@ -13,10 +13,10 @@ abstract class Routes
         $footer   =  __VIEW__ .  $rawFooter;
 
         return [
-            'route' => $route, 
-            'path' => str_replace('\\', DIRECTORY_SEPARATOR, $pathFile),
+            'route'  => $route, 
+            'path'   => str_replace('\\', DIRECTORY_SEPARATOR, $pathFile),
             'params' => $params,
-            'title' => $title,
+            'title'  => $title,
             'footer' => $footer
         ];
     }

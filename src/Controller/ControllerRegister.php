@@ -47,13 +47,13 @@ class ControllerRegister extends Register
 
     protected function saveProfilePicture() {
 
-      if (is_null($this->getProfilePicture()))
-        return;
-
       try {
 
         $photo = $this->getProfilePicture();
         
+        if (empty($photo['type']))
+            return;
+
         //Pega o tamanho da antiga imagem
         list($old_width, $old_height) = getimagesize($photo['tmp_name']);
 
@@ -62,7 +62,7 @@ class ControllerRegister extends Register
 
         //Pega a extensão [jpge, jpg, png]
         $extension = explode('/', $photo['type']);
-
+  
         switch ($extension[1]) {
           case 'jpeg';
           case 'jpg';
@@ -72,7 +72,8 @@ class ControllerRegister extends Register
           case 'png';
               $oldImage = imagecreatefrompng($photo['tmp_name']);
               break;
-  
+          case '':
+              $oldImage = null; 
           default:
                $this->hasMensage('Formato de arquivo não suportado. Formatos suportados: png, jpeg, jpg', '/register');
               break;
