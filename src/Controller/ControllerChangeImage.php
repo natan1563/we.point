@@ -5,17 +5,14 @@ namespace Controller;
 use Helpers\ConnectionTrait;
 use Helpers\HasMensageTrait;
 
-class ControllerChangeImage extends ControllerRegister{
+class ControllerChangeImage extends ControllerRegister {
 
     use ConnectionTrait;
     use HasMensageTrait;
 
     public function uploadProfilePicture() {
-        $file = $this->saveProfilePicture();
-
-        // if(!unlink($file))
-        //     $this->hasMensage('Erro interno, tente novamente.', '/change-profile');
         
+        $file = $this->saveProfilePicture();
         $stmt = $this->conn->prepare('UPDATE users SET path_image = :path_image WHERE id = :id');
         $stmt->bindValue(':path_image', $file);
         $stmt->bindValue(':id', $_SESSION['id']);
